@@ -1,10 +1,10 @@
 defmodule Day08.Part1 do
-  def solve(input) do
+  def solve(_input) do
   end
 end
 
 defmodule Day08.Part2 do
-  def solve(input) do
+  def solve(_input) do
   end
 end
 
