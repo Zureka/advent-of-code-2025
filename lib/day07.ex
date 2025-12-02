@@ -1,10 +1,12 @@
 defmodule Day07.Part1 do
   def solve(_input) do
+    0
   end
 end
 
 defmodule Day07.Part2 do
   def solve(_input) do
+    0
   end
 end
 
