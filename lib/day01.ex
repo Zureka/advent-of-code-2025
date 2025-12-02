@@ -52,36 +52,33 @@ defmodule Day01.Part2 do
   defp adjustDial(adjustments, start) do
     [count, _] =
       Enum.reduce(adjustments, [0, start], fn adj, [count, pos] ->
-        pos_adj = pos + rem(adj, 100)
-        num_passes = abs(div(adj, 100))
+        remainder = rem(adj, 100)
+        full_rotations = abs(div(adj, 100))
 
-        new_pos =
+        new_pos = normalize_position(pos + remainder)
+
+        zero_crossings =
           cond do
-            pos_adj < 0 -> 100 + pos_adj
-            pos_adj > 100 -> pos_adj - 100
-            pos_adj == 100 -> 0
-            true -> pos_adj
+            new_pos == 0 && pos != 0 -> 1
+            pos == 0 or new_pos == 0 -> 0
+            adj > 0 && new_pos < pos -> 1
+            adj < 0 && new_pos > pos -> 1
+            true -> 0
           end
 
-        crossed_zero =
-          cond do
-            pos == 0 or new_pos == 0 -> false
-            adj > 0 && new_pos < pos -> true
-            adj < 0 && new_pos > pos -> true
-            true -> false
-          end
-
-        new_count =
-          cond do
-            new_pos == 0 && pos != 0 -> count + num_passes + 1
-            crossed_zero -> count + num_passes + 1
-            true -> count + num_passes
-          end
-
-        [new_count, new_pos]
+        [count + full_rotations + zero_crossings, new_pos]
       end)
 
     count
+  end
+
+  defp normalize_position(pos) do
+    cond do
+      pos < 0 -> 100 + pos
+      pos > 100 -> pos - 100
+      pos == 100 -> 0
+      true -> pos
+    end
   end
 end
 
