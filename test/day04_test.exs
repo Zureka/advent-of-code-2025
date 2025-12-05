@@ -2,9 +2,18 @@ defmodule Day04Test do
   use ExUnit.Case
 
   @example_input """
+  ..@@.@@@@.
+  @@@.@.@.@@
+  @@@@@.@.@@
+  @.@@@@..@.
+  @@.@@@@.@@
+  .@@@@@@@.@
+  .@.@.@.@@@
+  @.@@@.@@@@
+  .@@@@@@@@.
+  @.@.@@@.@.
   """
 
-  @tag :skip
   test "solves example input for part 1" do
     assert Day04.Part1.solve(@example_input) == 13
   end
